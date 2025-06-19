@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animales Marinos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <style>
+        /* Importa la fuente Questrial desde Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+        body {
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial como fuente principal */
+            background-color: #547792;
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            background-color: #213448;
+            padding: 20px 0;
+        }
+
+        /* Cambia la tipografía de la subsección en el encabezado */
+        header h3 {
+            font-family: 'Questrial', sans-serif; /* Aquí se aplica Questrial */
+            font-weight: normal;
+        }
+
+        nav {
+            background-color: #547792;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background-color: #213448;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial a los botones de navegación */
+        }
+
+        nav button:hover {
+            background-color: #415b78;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            text-align: left;
+            padding: 0 20px 40px 20px;
+        }
+
+        section {
+            display: none; /* Todas las secciones están ocultas por defecto */
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial a todas las secciones por defecto */
+        }
+
+        section.active {
+            display: block; /* Solo la sección con la clase 'active' se muestra */
+        }
+
+        #principal {
+            background-color: #547792;
+            color: white;
+            font-family: 'Questrial', sans-serif; /* Aseguramos Questrial para la sección principal */
+        }
+
+        #introduccion, #especies, #conservacion, #noticias, #galeria {
+            background-color: #C6E7FF;
+            color: black;
+            font-family: 'Questrial', sans-serif; /* Aseguramos Questrial para estas secciones */
+        }
+
+        .intro-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .intro-content img {
+            width: 250px;
+            border-radius: 8px;
+            height: auto; /* Asegura que la imagen no se distorsione */
+        }
+
+        .intro-text {
+            flex: 1;
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial específicamente al texto de introducción */
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        img.main-img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto; /* Asegura que la imagen no se distorsione */
+            border-radius: 10px;
+        }
+
+        iframe, video { /* Añadido video a la regla para centrar */
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: none;
+            max-width: 100%; /* Para hacer el video responsivo */
+        }
+
+        footer {
+            background-color: #547792;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial al pie de página */
+        }
+
+        footer img {
+            width: 60px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .ficha-especie {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            color: black;
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial a las fichas de especie */
+            flex-wrap: wrap; /* Permite que las fichas se ajusten en pantallas pequeñas */
+        }
+        .ficha-especie img {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            max-width: 100%; /* Ajuste para pantallas pequeñas */
+        }
+        .ficha-especie > div { /* Contenido de la ficha */
+            flex: 1;
+        }
+        .ficha-especie h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-family: 'Questrial', sans-serif; /* Aseguramos Questrial para los títulos dentro de las fichas */
+        }
+        .categoria h3 {
+            color: #213448;
+            font-family: 'Questrial', sans-serif; /* Aseguramos Questrial para los títulos de categoría */
+        }
+
+        #especies > div > button {
+            background-color: #213448;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Questrial', sans-serif; /* Aplica Questrial a los botones de categorías de especies */
+            margin: 5px; /* Añadido margen para separación entre botones */
+        }
+        #especies > div > button:hover {
+            background-color: #415b78;
+        }
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .galeria img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover; /* recorta sin deformar */
+            border-radius: 8px; /* opcional: esquinas redondeadas */
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            header div {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .intro-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .ficha-especie {
+                flex-direction: column;
+                align-items: center;
+            }
+            .ficha-especie img {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            nav button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 80px;">
+        <img src="/hugo imagenes/logo.jpeg" alt="logo" width="200" />
+        <div style="text-align: left; font-size: 24px; line-height: 2.4;">
+            <h1 style="margin: 0;">Animales Marinos</h1>
+            <h3 style="margin: 0; font-weight: normal;">Donde la ciencia y la pasión por el mar se unen</h3>
+        </div>
+    </div>
+</header>
+<nav>
+    <button onclick="mostrarSeccion('principal')">Página Principal</button>
+    <button onclick="mostrarSeccion('introduccion')">Introducción</button>
+    <button onclick="mostrarSeccion('especies')">Especies</button>
+    <button onclick="mostrarSeccion('conservacion')">Conservación</button>
+    <button onclick="mostrarSeccion('noticias')">Noticias</button>
+    <button onclick="mostrarSeccion('galeria')">Galería</button>
+</nav>
+
+<main>
+    <section id="principal" class="active">
+        <h2>BIENVENIDOS Y BIENVENIDAS</h2>
+        <p>
+            Bienvenidos al fascinante mundo de los animales marinos. Explora su diversidad, belleza y la importancia de su conservación.
+            Donde la ciencia y la pasión por el mar se unen.
+        </p>
+        <img class="main-img" src="/hugo imagenes/pagina principal/oceano-con-vida-marina.jpg" alt="oceano-con-vida-marina" />
+    </section>
+
+    <section id="introduccion">
+        <h2>Introducción</h2>
+        <p>
+            Los animales marinos constituyen una parte esencial del ecosistema oceánico.
+            Desde el plancton microscópico hasta las ballenas gigantes, cada criatura desempeña un papel vital.
+        </p>
+        <div class="intro-content">
+            <img src="/hugo imagenes/introduccion/orca.jpg" alt="orca"/>
+            <div class="intro-text">
+                Descubre el Fascinante Mundo de los Animales Marinos.<br>
+                Los océanos cubren más del 70% de la superficie terrestre y albergan una increíble diversidad de vida. Desde diminutos microorganismos hasta majestuosas ballenas, los animales marinos forman parte de un ecosistema vital y asombroso. En esta página, te invitamos a explorar la belleza, el comportamiento y la importancia de estas criaturas que habitan en las profundidades del mar. Sumérgete con nosotros y conoce más sobre los secretos que esconde el mundo submarino.
+            </div>
+        </div>
+        <video width="640" height="360" controls>
+            <source src="D:\hugo\605 pagina animales marinos 2521.github.io\hugo imagenes\Animales Marinos para niños (con vídeos).mp4" type="video/mp4">
+            Tu navegador no soporta el tag de video.
+        </video>
+    </section>
+
+    <section id="especies">
+        <h2>Especies</h2>
+        <p>Selecciona una categoría para ver más información:</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+            <button onclick="mostrarCategoria('mamiferos')">Mamíferos Marinos</button>
+            <button onclick="mostrarCategoria('peces')">Peces</button>
+            <button onclick="mostrarCategoria('moluscos')">Moluscos y Cefalópodos</button>
+            <button onclick="mostrarCategoria('crustaceos')">Crustáceos</button>
+            <button onclick="mostrarCategoria('reptiles')">Reptiles Marinos</button>
+            <button onclick="mostrarCategoria('invertebrados')">Otros Invertebrados Marinos</button>
+        </div>
+
+        <div id="mamiferos" class="categoria" style="display:none;">
+            <h3>Mamíferos Marinos</h3>
+            <p>Incluyen ballenas, delfines, focas y nutrias marinas. Son animales de sangre caliente que respiran aire.</p>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Mamíferos Marinos/delfin-nariz-de-botella.jpg" alt="delfin-nariz-de-botella">
+                <div>
+                    <h4>1. Delfín nariz de botella (<i>Tursiops truncatus</i>)</h4>
+                    <p><strong>Descripción:</strong> Cetáceo inteligente, cuerpo hidrodinámico y hocico prominente.</p>
+                    <p><strong>Tamaño:</strong> 2 a 4 metros de longitud.</p>
+                    <p><strong>Alimentación:</strong> Peces, calamares y crustáceos.</p>
+                    <p><strong>Distribución:</strong> Océanos templados y tropicales de todo el mundo.</p>
+                    <p><strong>Dato curioso:</strong> Pueden reconocerse en un espejo, señal de autoconciencia.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Mamíferos Marinos/ballena-azul.jpg" alt="ballena-azul">
+                <div>
+                    <h4>2. Ballena azul (<i>Balaenoptera musculus</i>)</h4>
+                    <p><strong>Descripción:</strong> El animal más grande del planeta.</p>
+                    <p><strong>Tamaño:</strong> Hasta 30 metros de largo y 180 toneladas de peso.</p>
+                    <p><strong>Alimentación:</strong> Krill y pequeños organismos filtrados por barbas.</p>
+                    <p><strong>Distribución:</strong> Océanos de todo el mundo, principalmente aguas frías.</p>
+                    <p><strong>Dato curioso:</strong> Su corazón puede pesar tanto como un coche pequeño.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Mamíferos Marinos/foca-comun.jpg" alt="foca-comun">
+                <div>
+                    <h4>3. Foca común (<i>Phoca vitulina</i>)</h4>
+                    <p><strong>Descripción:</strong> Mamífero ágil que pasa tiempo en tierra y agua.</p>
+                    <p><strong>Tamaño:</strong> 1.2 a 1.9 metros de longitud.</p>
+                    <p><strong>Alimentación:</strong> Peces, calamares y crustáceos.</p>
+                    <p><strong>Distribución:</strong> Aguas costeras del hemisferio norte.</p>
+                    <p><strong>Dato curioso:</strong> Puede aguantar la respiración hasta 30 minutos bajo el agua.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Mamíferos Marinos/nutria-marina.jpg" alt="nutria-marina">
+                <div>
+                    <h4>4. Nutria marina (<i>Enhydra lutris</i>)</h4>
+                    <p><strong>Descripción:</strong> Pequeño mamífero con pelaje denso y hábitos juguetones.</p>
+                    <p><strong>Tamaño:</strong> 1 metro de longitud aproximadamente.</p>
+                    <p><strong>Alimentación:</strong> Moluscos, erizos y peces pequeños.</p>
+                    <p><strong>Distribución:</strong> Costas del Pacífico Norte.</p>
+                    <p><strong>Dato curioso:</strong> Utilizan piedras para abrir conchas y alimentarse.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Mamíferos Marinos/orcinus-orca.jpg" alt="orcinus-orca">
+                <div>
+                    <h4>5. Orca (<i>Orcinus orca</i>)</h4>
+                    <p><strong>Descripción:</strong> La orca, también conocida como "ballena asesina", es un cetáceo odontoceto que destaca por su piel negra y blanca muy contrastante. Es un depredador tope en la cadena alimentaria marina, con una estructura social compleja y comportamientos muy inteligentes y sociales.</p>
+                    <p><strong>Tamaño:</strong> Entre 5 y 9 metros de longitud, siendo las hembras generalmente más pequeñas que los machos. Pueden pesar hasta 6 toneladas.</p>
+                    <p><strong>Alimentación:</strong> Omnívora carnívora, se alimenta principalmente de peces, focas, delfines, tiburones e incluso ballenas más pequeñas. Utilizan técnicas sofisticadas de caza en grupo.</p>
+                    <p><strong>Distribución:</strong> Se encuentran en todos los océanos, desde las aguas polares hasta las tropicales, aunque son más comunes en regiones templadas y frías.</p>
+                    <p><strong>Dato curioso:</strong> Cada grupo social (llamado “pod”) tiene su propio dialecto de sonidos y canciones, lo que facilita la comunicación y el reconocimiento entre miembros.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="peces" class="categoria" style="display:none;">
+            <h3>Peces</h3>
+            <p>Grupo diverso que incluye desde peces óseos como el atún hasta peces cartilaginosos como los tiburones.</p>
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Peces/tiburon-blanco.jpg" alt="tiburon-blanco">
+                <div>
+                    <h4>1. Tiburón blanco (<i>Carcharodon carcharias</i>)</h4>
+                    <p><strong>Descripción:</strong> Gran depredador marino con cuerpo robusto y dientes afilados.</p>
+                    <p><strong>Tamaño:</strong> Hasta 6 metros de longitud.</p>
+                    <p><strong>Alimentación:</strong> Focas, peces grandes, tortugas y otros tiburones.</p>
+                    <p><strong>Distribución:</strong> Océanos templados y costeros de todo el mundo.</p>
+                    <p><strong>Dato curioso:</strong> Puede detectar una gota de sangre a kilómetros de distancia.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Peces/pez-globo.jpg" alt="pez-globo">
+                <div>
+                    <h4>2. Pez globo (<i>Tetraodontidae</i>)</h4>
+                    <p><strong>Descripción:</strong> Pez con la capacidad de inflarse al sentirse amenazado.</p>
+                    <p><strong>Tamaño:</strong> De 10 a 60 cm, según la especie.</p>
+                    <p><strong>Alimentación:</strong> Moluscos, crustáceos y algas.</p>
+                    <p><strong>Distribución:</strong> Aguas tropicales y subtropicales.</p>
+                    <p><strong>Dato curioso:</strong> Muchos contienen una toxina mortal llamada tetrodotoxina.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Peces/pez-leon.jpg" alt="pez-leon">
+                <div>
+                    <h4>3. Pez león (<i>Pterois volitans</i>)</h4>
+                    <p><strong>Descripción:</strong> Pez exótico con aletas largas y venenosas.</p>
+                    <p><strong>Tamaño:</strong> Hasta 40 cm de longitud.</p>
+                    <p><strong>Alimentación:</strong> Peces pequeños y crustáceos.</p>
+                    <p><strong>Distribución:</strong> Océano Índico y Pacífico, y como especie invasora en el Caribe.</p>
+                    <p><strong>Dato curioso:</strong> Su picadura es dolorosa, pero rara vez mortal para los humanos.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Peces/caballito-mar-comun.jpg" alt="caballito-mar-comun">
+                <div>
+                    <h4>4. Caballito de mar común (<i>Hippocampus kuda</i>)</h4>
+                    <p><strong>Descripción:</strong> Pez con forma de caballo, nada en posición vertical.</p>
+                    <p><strong>Tamaño:</strong> 12 a 17 cm de longitud.</p>
+                    <p><strong>Alimentación:</strong> Plancton, pequeños crustáceos y larvas.</p>
+                    <p><strong>Distribución:</strong> Costas tropicales del Indo-Pacífico.</p>
+                    <p><strong>Dato curioso:</strong> El macho lleva los huevos en una bolsa incubadora y da a luz.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Peces/manta-raya-oceanica.jpg" alt="manta-raya-oceanica">
+                <div>
+                    <h4>5. Manta raya oceánica (<i>Mobula birostris</i>)</h4>
+                    <p><strong>Descripción:</strong> Gigante del océano con forma de diamante y grandes aletas pectorales.</p>
+                    <p><strong>Tamaño:</strong> Hasta 7 metros de envergadura.</p>
+                    <p><strong>Alimentación:</strong> Plancton y pequeños organismos filtrados del agua.</p>
+                    <p><strong>Distribución:</strong> Aguas tropicales y subtropicales en todo el mundo.</p>
+                    <p><strong>Dato curioso:</strong> Saltan fuera del agua, posiblemente como parte del cortejo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="moluscos" class="categoria" style="display:none;">
+            <h3>Moluscos y Cefalópodos</h3>
+            <p>Grupo que incluye pulpos, calamares, sepias y caracoles marinos, conocidos por su inteligencia, camuflaje o conchas venenosas.</p>
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Moluscos y Cefalópodos/pulpo-comun.jpg" alt="pulpo-comun">
+                <div>
+                    <h4>1. Pulpo común (<i>Octopus vulgaris</i>)</h4>
+                    <p><strong>Descripción:</strong> Cefalópodo inteligente de cuerpo blando con ocho brazos y gran capacidad de camuflaje.</p>
+                    <p><strong>Tamaño:</strong> Hasta 1 metro de longitud.</p>
+                    <p><strong>Alimentación:</strong> Crustáceos, peces y moluscos.</p>
+                    <p><strong>Distribución:</strong> Océanos templados y tropicales.</p>
+                    <p><strong>Dato curioso:</strong> Puede abrir frascos con rosca gracias a su destreza y memoria.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Moluscos y Cefalópodos/calamar-gigante.jpg" alt="calamar-gigante">
+                <div>
+                    <h4>2. Calamar gigante (<i>Architeuthis dux</i>)</h4>
+                    <p><strong>Descripción:</strong> Enorme cefalópodo de aguas profundas, rara vez observado vivo.</p>
+                    <p><strong>Tamaño:</strong> Hasta 13 metros en hembras.</p>
+                    <p><strong>Alimentación:</strong> Peces y otros calamares.</p>
+                    <p><strong>Distribución:</strong> Océanos profundos del mundo.</p>
+                    <p><strong>Dato curioso:</strong> Tiene ojos del tamaño de una pelota de baloncesto, los más grandes del reino animal.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Moluscos y Cefalópodos/sepia-comun.jpg" alt="sepia-comun">
+                <div>
+                    <h4>3. Sepia común (<i>Sepia officinalis</i>)</h4>
+                    <p><strong>Descripción:</strong> Cefalópodo de cuerpo ancho y aletas laterales, conocido por su tinta y habilidad de camuflaje.</p>
+                    <p><strong>Tamaño:</strong> Hasta 45 cm.</p>
+                    <p><strong>Alimentación:</strong> Cangrejos, peces pequeños.</p>
+                    <p><strong>Distribución:</strong> Mar Mediterráneo y océano Atlántico oriental.</p>
+                    <p><strong>Dato curioso:</strong> Cambia rápidamente de color y textura para comunicarse y camuflarse.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Moluscos y Cefalópodos/pulpo-anillos-azules.jpg" alt="pulpo-anillos-azules">
+                <div>
+                    <h4>4. Pulpo de anillos azules (<i>Hapalochlaena lunulata</i>)</h4>
+                    <p><strong>Descripción:</strong> Pequeño pero extremadamente venenoso, con anillos azules brillantes cuando se siente amenazado.</p>
+                    <p><strong>Tamaño:</strong> Hasta 20 cm con brazos extendidos.</p>
+                    <p><strong>Alimentación:</strong> Cangrejos, camarones y peces pequeños.</p>
+                    <p><strong>Distribución:</strong> Océano Pacífico occidental y mar de Coral.</p>
+                    <p><strong>Dato curioso:</strong> Su veneno puede matar a un humano en minutos, sin antídoto conocido.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Moluscos y Cefalópodos/caracol-cono.jpg" alt="caracol-cono">
+                <div>
+                    <h4>5. Caracol cono (<i>Conus spp.</i>)</h4>
+                    <p><strong>Descripción:</strong> Molusco con concha cónica y veneno potente utilizado para cazar peces y gusanos.</p>
+                    <p><strong>Tamaño:</strong> Entre 3 y 15 cm dependiendo de la especie.</p>
+                    <p><strong>Alimentación:</strong> Peces, gusanos marinos y otros moluscos.</p>
+                    <p><strong>Distribución:</strong> Aguas tropicales del Indo-Pacífico.</p>
+                    <p><strong>Dato curioso:</strong> Algunas especies tienen un veneno más fuerte que el de muchas serpientes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="crustaceos" class="categoria" style="display:none;">
+            <h3>Crustáceos</h3>
+            <p>Grupo diverso de invertebrados marinos con exoesqueletos duros, incluyendo cangrejos, camarones y langostas.</p>
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Crustáceos/cangrejo-rojo-isla-navidad.jpg" alt="cangrejo-rojo-isla-navidad">
+                <div>
+                    <h4>1. Cangrejo rojo de la Isla de Navidad (<i>Gecarcoidea natalis</i>)</h4>
+                    <p><strong>Descripción:</strong> Crustáceo terrestre conocido por su migración masiva hacia el mar para reproducirse.</p>
+                    <p><strong>Tamaño:</strong> Hasta 11 cm.</p>
+                    <p><strong>Alimentación:</strong> Hojas, semillas y materia vegetal.</p>
+                    <p><strong>Distribución:</strong> Isla de Navidad, Océano Índico.</p>
+                    <p><strong>Dato curioso:</strong> Sus migraciones pueden involucrar millones de individuos simultáneamente.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Crustáceos/langosta-marina.jpg" alt="langosta-marina">
+                <div>
+                    <h4>2. Langosta marina (<i>Palinuridae</i>)</h4>
+                    <p><strong>Descripción:</strong> Crustáceo de cuerpo largo, con antenas prominentes y sin grandes pinzas.</p>
+                    <p><strong>Tamaño:</strong> Hasta 60 cm.</p>
+                    <p><strong>Alimentación:</strong> Moluscos, peces muertos, algas.</p>
+                    <p><strong>Distribución:</strong> Aguas tropicales y subtropicales.</p>
+                    <p><strong>Dato curioso:</strong> Emiten sonidos para defenderse frotando sus antenas contra el caparazón.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Crustáceos/camaron-mantis.jpg" alt="camaron-mantis">
+                <div>
+                    <h4>3. Camarón mantis (<i>Odontodactylus scyllarus</i>)</h4>
+                    <p><strong>Descripción:</strong> Crustáceo agresivo con patas delanteras especializadas para golpear a gran velocidad.</p>
+                    <p><strong>Tamaño:</strong> Hasta 18 cm.</p>
+                    <p><strong>Alimentación:</strong> Crustáceos, moluscos, peces.</p>
+                    <p><strong>Distribución:</strong> Océano Índico y Pacífico.</p>
+                    <p><strong>Dato curioso:</strong> Su golpe puede romper cristales de acuarios.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Crustáceos/cangrejo-ermitano.jpg" alt="cangrejo-ermitano">
+                <div>
+                    <h4>4. Cangrejo ermitaño (<i>Paguroidea</i>)</h4>
+                    <p><strong>Descripción:</strong> Crustáceo que protege su abdomen blando habitando conchas vacías.</p>
+                    <p><strong>Tamaño:</strong> De 2 a 15 cm.</p>
+                    <p><strong>Alimentación:</strong> Detritus y restos orgánicos.</p>
+                    <p><strong>Distribución:</strong> Costas marinas de todo el mundo.</p>
+                    <p><strong>Dato curioso:</strong> A menudo convive con anémonas que colocan sobre su concha para protección.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Crustáceos/camaron-limpiador.jpg" alt="camaron-limpiador">
+                <div>
+                    <h4>5. Camarón limpiador (<i>Lysmata amboinensis</i>)</h4>
+                    <p><strong>Descripción:</strong> Crustáceo pequeño que establece estaciones de limpieza donde remueve parásitos de peces.</p>
+                    <p><strong>Tamaño:</strong> 4–6 cm.</p>
+                    <p><strong>Alimentación:</strong> Parásitos y tejido muerto de otros peces.</p>
+                    <p><strong>Distribución:</strong> Arrecifes del Indo-Pacífico.</p>
+                    <p><strong>Dato curioso:</strong> Realiza un "baile" para atraer peces que necesitan limpieza.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="reptiles" class="categoria" style="display:none;">
+            <h3>Reptiles Marinos</h3>
+            <p>Tortugas marinas adaptadas a la vida en el océano, muchas de ellas en peligro de extinción.</p>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Reptiles Marinos/tortuga-laud.jpg" alt="tortuga-laud">
+                <div>
+                    <h4>1. Tortuga laúd (<i>Dermochelys coriacea</i>)</h4>
+                    <p><strong>Descripción:</strong> La tortuga marina más grande, con caparazón flexible cubierto por piel en lugar de escamas duras.</p>
+                    <p><strong>Tamaño:</strong> Hasta 2.5 m de largo y más de 900 kg.</p>
+                    <p><strong>Alimentación:</strong> Medusas.</p>
+                    <p><strong>Distribución:</strong> Todos los océanos tropicales y templados.</p>
+                    <p><strong>Dato curioso:</strong> Puede sumergirse a más de 1,000 m de profundidad.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Reptiles Marinos/serpiente-marina-bandas.jpg" alt="serpiente-marina-bandas">
+                <div>
+                    <h4>2. Serpiente marina de bandas (<i>Laticauda colubrina</i>)</h4>
+                    <p><strong>Descripción:</strong> Una de las pocas serpientes marinas que todavía pone huevos en tierra.</p>
+                    <p><strong>Tamaño:</strong> Hasta 1.4 m.</p>
+                    <p><strong>Alimentación:</strong> Anguilas y peces pequeños.</p>
+                    <p><strong>Distribución:</strong> Costas del sudeste asiático y Oceanía.</p>
+                    <p><strong>Dato curioso:</strong> Tiene escamas ventrales como las serpientes terrestres.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Reptiles Marinos/iguana-marina.jpg" alt="iguana-marina.jpg">
+                <div>
+                    <h4>3. Iguana marina (<i>Amblyrhynchus cristatus</i>)</h4>
+                    <p><strong>Descripción:</strong> Único lagarto marino del mundo, especializado en alimentarse de algas submarinas.</p>
+                    <p><strong>Tamaño:</strong> Hasta 1.2 m y 10 kg.</p>
+                    <p><strong>Alimentación:</strong> Algas marinas.</p>
+                    <p><strong>Distribución:</strong> Islas Galápagos.</p>
+                    <p><strong>Dato curioso:</strong> Expulsa el exceso de sal a través de estornudos.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Reptiles Marinos/tortuga-carey.jpg" alt="tortuga-carey">
+                <div>
+                    <h4>4. Tortuga carey (<i>Eretmochelys imbricata</i>)</h4>
+                    <p><strong>Descripción:</strong> Tortuga de caparazón con escamas traslapadas y pico puntiagudo.</p>
+                    <p><strong>Tamaño:</strong> Hasta 90 cm y 80 kg.</p>
+                    <p><strong>Alimentación:</strong> Esponjas, anémonas, medusas.</p>
+                    <p><strong>Distribución:</strong> Regiones tropicales de los océanos Atlántico, Pacífico e Índico.</p>
+                    <p><strong>Dato curioso:</strong> Es fundamental para el equilibrio ecológico de los arrecifes coralinos.</p>
+                </div>
+            </div>
+
+            <div class="ficha-especie">
+                <img src="/hugo imagenes/Especies/Reptiles Marinos/cocodrilo-agua-salada.jpg" alt="cocodrilo-agua-salada">
+                <div>
+                    <h4>5. Cocodrilo de agua salada (<i>Crocodylus porosus</i>)</h4>
+                    <p><strong>Descripción:</strong> El reptil más grande del planeta, capaz de recorrer largas distancias por mar.</p>
+                    <p><strong>Tamaño:</strong> Hasta 7 m y más de 1,000 kg.</p>
+                    <p><strong>Alimentación:</strong> Peces, aves, mamíferos grandes.</p>
+                    <p><strong>Distribución:</strong> Costas del sudeste asiático, Australia y algunas islas del Pacífico.</p>
+                    <p><strong>Dato curioso:</strong> Poseen glándulas de sal para excretar el exceso de sal marina, permitiéndoles habitar tanto en agua dulce como salada.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="invertebrados" class="categoria" style="display:none;">
+    <h3>Otros Invertebrados Marinos</h3>
+    <p>Organismos sin columna vertebral que desempeñan papeles vitales en los ecosistemas marinos.</p>
+
+    <div class="ficha-especie">
+        <img src="/hugo imagenes/Especies/Otros Invertebrados Marinos/estrella-de-mar.jpg" alt="estrella-de-mar">
+        <div>
+            <h4>1. Estrella de mar (<i>Asteroidea</i>)</h4>
+            <p><strong>Descripción:</strong> Equinodermo de simetría radial con capacidad de regenerar brazos perdidos.</p>
+            <p><strong>Tamaño:</strong> Varía entre 10 y 50 cm.</p>
+            <p><strong>Distribución:</strong> Fondos marinos de todos los océanos.</p>
+            <p><strong>Dato curioso:</strong> Se alimenta evertiendo su estómago fuera de su cuerpo.</p>
+        </div>
+    </div>
+
+    <div class="ficha-especie">
+        <img src="/hugo imagenes/Especies/Otros Invertebrados Marinos/medusa-luna.jpg" alt="medusa-luna">
+        <div>
+            <h4>2. Medusa luna (<i>Aurelia aurita</i>)</h4>
+            <p><strong>Descripción:</strong> Medusa translúcida con forma de campana y cuatro órganos sexuales visibles.</p>
+            <p><strong>Tamaño:</strong> Hasta 40 cm de diámetro.</p>
+            <p><strong>Distribución:</strong> Aguas costeras templadas y tropicales.</p>
+            <p><strong>Dato curioso:</strong> Sus tentáculos son urticantes, aunque poco peligrosos para humanos.</p>
+        </div>
+    </div>
+
+    <div class="ficha-especie">
+        <img src="/hugo imagenes/Especies/Otros Invertebrados Marinos/anemona-de-mar.jpg" alt="anemona-de-mar">
+        <div>
+            <h4>3. Anémona de mar (<i>Actiniaria</i>)</h4>
+            <p><strong>Descripción:</strong> Animal con tentáculos urticantes que se parece a una flor.</p>
+            <p><strong>Tamaño:</strong> Entre 1 y 30 cm.</p>
+            <p><strong>Distribución:</strong> Zonas costeras de todo el mundo.</p>
+            <p><strong>Dato curioso:</strong> Algunas especies viven simbióticamente con peces payaso.</p>
+        </div>
+    </div>
+
+    <div class="ficha-especie">
+        <img src="/hugo imagenes/Especies/Otros Invertebrados Marinos/coral-cerebro.jpg" alt="coral-cerebro">
+        <div>
+            <h4>4. Coral cerebro (<i>Diploria labyrinthiformis</i>)</h4>
+            <p><strong>Descripción:</strong> Coral duro con forma de cerebro, constructor de arrecifes.</p>
+            <p><strong>Tamaño:</strong> Hasta 1.5 m de diámetro.</p>
+            <p><strong>Distribución:</strong> Arrecifes del Caribe.</p>
+            <p><strong>Dato curioso:</strong> Puede vivir más de 100 años.</p>
+        </div>
+    </div>
+
+        <div class="ficha-especie">
+        <img src="/hugo imagenes/Especies/Otros Invertebrados Marinos/erizo-de-mar-purpura.jpg" alt="erizo-de-mar-purpura">
+        <div>
+            <h4>5. Erizo de mar púrpura (<i>Strongylocentrotus purpuratus</i>)</h4>
+            <p><strong>Descripción:</strong> Equinodermo con espinas punzantes y simetría radial.</p>
+            <p><strong>Tamaño:</strong> Hasta 10 cm.</p>
+            <p><strong>Distribución:</strong> Costas del Pacífico de América del Norte.</p>
+            <p><strong>Dato curioso:</strong> Tiene pies ambulacrales para moverse y alimentarse.</p>
+          </div>
+        </div>
+    </div>
+    </section>
+
+    <section id="conservacion">
+        <h2>Conservación</h2>
+        <p>
+            La conservación marina es crucial para proteger la vida en nuestros océanos. Las amenazas incluyen la pesca excesiva, la contaminación, el cambio climático y la destrucción de hábitats.
+        </p>
+        <h3>Amenazas Principales:</h3>
+        <ul>
+            <li><strong>Contaminación por plásticos:</strong> Afecta a miles de especies marinas.</li>
+            <li><strong>Pesca excesiva:</strong> Agota las poblaciones de peces y desequilibra los ecosistemas.</li>
+            <li><strong>Calentamiento global:</strong> Provoca el blanqueamiento de corales y el aumento del nivel del mar.</li>
+            <li><strong>Acidificación del océano:</strong> Perjudica a organismos con conchas y esqueletos de carbonato de calcio.</li>
+        </ul>
+        <h3>¿Cómo podemos ayudar?</h3>
+        <ol>
+            <li>Reducir el consumo de plásticos de un solo uso.</li>
+            <li>Apoyar la pesca sostenible.</li>
+            <li>Participar en limpiezas de playas y océanos.</li>
+            <li>Educar a otros sobre la importancia de la conservación marina.</li>
+            <li>Reducir nuestra huella de carbono.</li>
+        </ol>
+       <img src="D:\hugo\6605 pagina animales marinos 2521.github.io\hugo imagenes\conservacion\Amenazas marinas.jpg" alt="Amenazas marinas" width="500">
+        <h2>Donaciones</h2>
+    <p>Apoya los proyectos de conservación marina.</p>
+    <a href="https://www.wwf.org" target="_blank">Haz tu donación aquí</a>
+    </section>
+
+     <section id="noticias" class="noticias">
+    <h2>Últimas Noticias</h2>
+    <article>
+      <h3>1- Iniciativa global para limpiar los océanos</h3>
+      <p>Más de 50 países colaboran en un proyecto internacional para reducir los residuos plásticos marinos con nuevas tecnologías y regulaciones ambientales.</p>
+      <a href="https://news.un.org/es/story/2021/04/1490582">Lanzan iniciativa mundial para acabar con la basura marina y limpiar los océanos</a>
+    </article>
+    <article>
+      <h3>2- Restauración de arrecifes en peligro</h3>
+      <p>Un equipo de biólogos logra restaurar el 30% de un arrecife caribeño usando técnicas innovadoras de cultivo de coral.</p>
+      <a href="https://www.earthshare.org/es/30x30-project/coral-reef-restoration/">Restauración de arrecifes de coral</a>
+    </article>
+    <article>
+      <h3>3- Nuevos residentes bebés en San Antonio</h3>
+      <p>Las mamás, Piquet, un delfín de costado blanco del Pacífico, de 36 años, y Luna, una ballena beluga, de 23 años, son madres experimentadas, ya que han dado a luz a varias crías en el pasado.</p>
+      <a href="https://www.univision.com/local/san-antonio-kwex/cria-ballena-beluga-delfin-nacen-seaworld-san-antonio-texas">Nuevos residentes bebés en San Antonio: nacen una cría de ballena y otra de delfín en SeaWorld</a>
+    </article>
+    <article>
+      <h3>4- La segunda ballena más grande del mundo fue encontrada</h3>
+      <p>Cuando pensamos en animales marinos gigantes, nuestra mente se va de inmediato con las ballenas jorobadas, debido a que son los mamíferos más colosales de la Tierra.</p>
+      <a href="https://www.univision.com/explora/la-segunda-ballena-mas-grande-del-mundo-fue-encontrada-y-el-video-te-hara-sentir-diminuto">La segunda ballena más grande del mundo fue encontrada</a>
+    </article>
+  </section>
+
+     <section id="galeria">
+  <h2>Galería Marina</h2>
+  <div class="galeria">
+    <figure>
+      <img src="hugo imagenes/Especies/Peces/tiburon-blanco.jpg" alt="Tiburón blanco">
+      <figcaption>
+        Tiburón blanco<br>
+        <span>Pez</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Peces/pez-leon.jpg" alt="Pez león">
+      <figcaption>
+        Pez león<br>
+        <span>Pez</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Peces/pez-globo.jpg" alt="Pez globo">
+      <figcaption>
+        Pez globo<br>
+        <span>Pez</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Peces/manta-raya-oceanica.jpg" alt="Manta raya oceánica">
+      <figcaption>
+        Manta raya oceánica<br>
+        <span>Pez</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Peces/caballito-mar-comun.jpg" alt="Caballito de mar común">
+      <figcaption>
+        Caballito de mar común<br>
+        <span>Pez</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Mamíferos Marinos/ballena-azul.jpg" alt="Ballena azul">
+      <figcaption>
+        Ballena azul<br>
+        <span>Mamífero Marino</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Mamíferos Marinos/orcinus-orca.jpg" alt="Orcinus orca">
+      <figcaption>
+        Orcinus orca<br>
+        <span>Mamífero Marino</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Otros Invertebrados Marinos/erizo-de-mar-purpura.jpg" alt="Erizo de mar púrpura">
+      <figcaption>
+        Erizo de mar púrpura<br>
+        <span>Invertebrado Marino</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Otros Invertebrados Marinos/coral-cerebro.jpg" alt="Coral cerebro">
+      <figcaption>
+        Coral cerebro<br>
+        <span>Invertebrado Marino</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Otros Invertebrados Marinos/estrella-de-mar.jpg" alt="Estrella de mar">
+      <figcaption>
+        Estrella de mar<br>
+        <span>Invertebrado Marino</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="hugo imagenes/Especies/Reptiles Marinos/tortuga-carey.jpg" alt="Tortuga carey">
+      <figcaption>
+        Tortuga carey<br>
+        <span>Reptil Marino</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<footer>
+  <img src="hugo imagenes/logo.jpeg" alt="logo" />
+  <p>&copy; 2025 Animales Marinos. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    function mostrarSeccion(id) {
+        const secciones = document.querySelectorAll('section');
+        secciones.forEach(sec => sec.classList.remove('active')); // Oculta todas las secciones
+        const seccionActiva = document.getElementById(id);
+        if (seccionActiva) {
+            seccionActiva.classList.add('active'); // Muestra la sección deseada
+        }
+        // Si la sección 'especies' es la activa, asegúrate de ocultar las categorías al principio
+        if(id === 'especies'){
+            ocultarCategorias(); // Oculta todas las subcategorías al entrar a "Especies"
+        }
+    }
+
+    function mostrarCategoria(id) {
+        ocultarCategorias(); // Oculta todas las categorías antes de mostrar la seleccionada
+        const categoria = document.getElementById(id);
+        if (categoria) {
+            categoria.style.display = 'block';
+        }
+    }
+
+    function ocultarCategorias() {
+        const categorias = document.querySelectorAll('.categoria');
+        categorias.forEach(cat => cat.style.display = 'none');
+    }
+
+    window.onload = function () {
+        mostrarSeccion('principal'); // Muestra la sección principal al cargar la página
+    }
+</script>
+</body>
+</html>
